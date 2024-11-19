@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Synonym from './assets/Synonym.json';
+
 
 const App = () => {
   const [query, setQuery] = useState('');
@@ -8,12 +10,7 @@ const App = () => {
   const [selectedCocktail, setSelectedCocktail] = useState(null);  
 
   const mapQuery = (input) => {
-    const queryMap = {
-      'cocktail': 'alc',
-      'mocktail': 'nalc',
-      'recommend': 'optalc'
-    };
-    return queryMap[input.toLowerCase()] || input; 
+    return Synonym[input.toLowerCase()] || input;
   };
 
   const handleSearch = async () => {
