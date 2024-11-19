@@ -1,8 +1,7 @@
 const { Client } = require('@elastic/elasticsearch');
 
 // change this for your cert
-const certificateBase64 = `
-`;
+const certificateBase64 = ``;
 
 const uname = '';
 const passwrd = '';
@@ -47,6 +46,7 @@ app.get('/api/search', async (req, res) => {
 
     try {
         let searchQuery;
+
         const alcoholicKeywords = ['alc', 'nalc', 'optalc'];
         if (alcoholicKeywords.includes(query.toLowerCase())) {
             searchQuery = {
@@ -130,11 +130,13 @@ app.get('/api/search', async (req, res) => {
                                   strAlcoholic === 'optalc' ? 'Optional Alcohol' :
                                   strAlcoholic;
 
+            console.log(hit)
+
             return {
                 idDrink: hit._source.idDrink || 'N/A',
                 strDrink: hit._source.strDrink || 'N/A',
                 ingredients: hit._source.ingredients || 'N/A',
-                strAlcoholic: alcoholStatus, 
+                strAlcoholic: alcoholStatus, // Use the transformed alcohol status
                 strCategory: hit._source.strCategory || 'N/A',
                 strGlass: hit._source.strGlass || 'N/A',
                 strDrinkThumb: hit._source.strDrinkThumb || 'N/A',
